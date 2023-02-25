@@ -358,17 +358,6 @@ lvim.colorscheme = "vscode"
             -- Use '<leader>cm' for a multi-line comment frame
         },
         {
-            -- TODO: might have issue with '~' folder stuff
-            -- Auto session management
-            'rmagatti/auto-session',
-            config = function()
-                require('auto-session').setup({
-                    log_level = 'error',
-                    auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
-                })
-            end,
-        },
-        {
             -- TODO: Sometimes works, sometimes doesn't
             -- Underlines occurrences of current word under cursor
             'yamatsum/nvim-cursorline',
