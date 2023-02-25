@@ -13,6 +13,15 @@
         May have to run ':TSInstall lua' a few times, idk
     - If C++'s bits\stdc++.h cannot be found, put a copy of it into:
         'C:\Program Files\LLVM\lib\clang\15.0.7\include\bits\'
+    - To add a LunarVim logo to the dashboard, add the ASCII art to:
+        'C:\Users\USERNAME\AppData\Roaming\lunarvim\lvim\lua\lvim\core\alpha\dashboard.lua'
+	"██╗      ██╗   ██╗ ███╗   ██╗  █████╗  ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+	"██║      ██║   ██║ ████╗  ██║ ██╔══██╗ ██╔══██╗ ██║   ██║ ██║ ████╗ ████║",
+	"██║      ██║   ██║ ██╔██╗ ██║ ███████║ ██████╔╝ ██║   ██║ ██║ ██╔████╔██║",
+	"██║      ██║   ██║ ██║╚██╗██║ ██╔══██║ ██╔══██╗ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+	"███████╗ ╚██████╔╝ ██║ ╚████║ ██║  ██║ ██║  ██║  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+	"╚══════╝  ╚═════╝  ╚═╝  ╚═══╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝   ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
+	"                                                                  ",
 ]]
 
 
@@ -249,8 +258,184 @@ lvim.colorscheme = "vscode"
 -- Additional Plugins
     lvim.plugins = {
         {
+            -- VSCode theme
             'Mofiqul/vscode.nvim',
         },
+        {
+            -- Easier movement using 'f'
+            'unblevable/quick-scope',
+            -- Highlights unique characters so you can 'f' to a word rather than spamming 'w'
+        },
+        {
+            -- Automatically generates annotations for classes, functions, etc.
+            'danymat/neogen',
+            config = function()
+                require('neogen').setup({})
+            end,
+            requires = 'nvim-treesitter/nvim-treesitter',
+            -- Generate annoations for the function/class the cursor is at with ':Neogen'
+        },
+        {
+            -- Improves nvim-treesitter
+            'nvim-treesitter/nvim-treesitter-textobjects',
+            after = 'nvim-treesitter',
+            requires = 'nvim-treesitter/nvim-treesitter',
+        },
+        {
+            -- Colorizes hexadecimal values for CSS
+            'norcalli/nvim-colorizer.lua',
+            config = function()
+                require('colorizer').setup()
+            end,
+        },
+        {
+            -- Highlights comments for TODO, HACK, BUG, etc. 
+            'folke/todo-comments.nvim',
+            requires = 'nvim-lua/plenary.nvim',
+            config = function()
+                require('todo-comments').setup({})
+            end,
+            -- Must put the ':' after TODO, HACK, BUG, etc.
+        },
+        {
+            -- Allows '.' repeating for non-native keymaps
+            'tpope/vim-repeat',
+        },
+        {
+            -- Visually peek lines of code when using ':<line number>'
+            'nacro90/numb.nvim',
+            config = function()
+                require('numb').setup()
+            end,
+        },
+        {
+            -- Discord presence for Neovim
+            'andweeb/presence.nvim',
+        },
+        {
+            -- Better virtual text displaying
+            'Hrle97/nvim.diagnostic_virtual_text_config',
+            config = function()
+                require('nvim.diagnostic_virtual_text_config').setup({})
+            end,
+        },
+        {
+            -- Git commands within Neovim
+            'tpope/vim-fugitive',
+        },
+        {
+            -- TODO: Not working
+            -- Easier window jumping
+            'kylechiu3201/nvim-window',
+            -- Use <C-W> then whatever letter that corresponds to the desired window
+        },
+        {
+            -- TODO: Not working
+            -- HTML automatic tag closing
+            'windwp/nvim-ts-autotag',
+            config = function()
+                require('nvim-ts-autotag').setup()
+            end,
+        },
+        {
+            -- TODO: Check what it should look like
+            -- Better diagnostic and quickfix menu
+            'folke/trouble.nvim',
+            requires = 'nvim-tree/nvim-web-devicons',
+            config = function()
+                require('trouble').setup({})
+            end,
+        },
+        {
+            -- Creates a comment frame for commenting
+            's1n7ax/nvim-comment-frame',
+            requires = { 'nvim-treesitter' },
+            config = function()
+                require('nvim-comment-frame').setup()
+            end,
+            -- TODO: cf and cm are unavailable as keymaps
+            -- Use '<leader>cf' for a single line comment frame
+            -- Use '<leader>cm' for a multi-line comment frame
+        },
+        {
+            -- TODO: might have issue with '~' folder stuff
+            -- Auto session management
+            'rmagatti/auto-session',
+            config = function()
+                require('auto-session').setup({
+                    log_level = 'error',
+                    auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+                })
+            end,
+        },
+        {
+            -- TODO: Sometimes works, sometimes doesn't
+            -- Underlines occurrences of current word under cursor
+            'yamatsum/nvim-cursorline',
+            config = function()
+                require('nvim-cursorline').setup({})
+            end,
+        },
+        {
+            -- TODO: Not working rn
+            -- Dims inactive windows
+            'sunjon/shade.nvim',
+            config = function()
+                require('shade').setup({})
+            end,
+        },
+        {
+            -- TODO: Not sure if currently working or not
+            -- Automatically formats code
+            'sbdchd/neoformat',
+            -- Use with ':Neoformat' to format current buffer or ':Neoformat xxx' to use xxx as formatter
+        },
+        {
+            -- TODO: Not working rn, don't know why
+            -- Dim unused variables, functions, etc.
+            'narutoxy/dim.lua',
+            requires = { 'nvim-treesitter/nvim-treesitter', 'neovim/nvim-lspconfig' },
+            config = function()
+                require('dim').setup({})
+            end,
+        },
+        -- TODO: currently not working, causing errors
+        -- {
+        --     -- Needed for 'range-highlight.nvim'
+        --     'winston0410/cmd-parser.nvim',
+        -- },
+        -- {
+        --     -- Highlights the line ranges typed into ':'
+        --     'winston0410/range-highlight.nvim',
+        --     config = function()
+        --         require('range-highlight').setup({})
+        --     end,
+        -- },
+        -- TODO: NOT DONE YET
+        -- need to add promise-async and also possible configs, but kinda complex rn
+        -- {
+            -- Nicer folding
+            -- 'kevinhwang91/nvim-ufo',
+            -- requires = 'kevinhwang91/promise-async',
+        -- },
+        -- TODO: might have issues?
+        -- TODO: add how to use
+        -- {
+            -- Fast movements
+            -- 'ggandor/leap.nvim',
+            -- config = function()
+            --     require('leap').add_default_mappings()
+            -- end,
+            -- Use 's' to search forward, 'S' for backwards
+            -- 
+        -- },
+        -- TODO: minimal configuration?
+        -- {
+            -- 'gelguy/wilder.nvim',
+            -- config = function()
+                -- 
+            -- end
+        -- },
     }
 
 
